@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.1/redux.js"
+      integrity="sha512-Olr8rkMYuxq3KpAPjYA/mAVYe7EIEP4RkhoAvD/qOrlauzE4CTvpQSg/cRX0/5Qreret4aobD0vg1xtjBqR7VA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
   </head>
   <body>
     <style>
@@ -13,7 +18,26 @@
       }
     </style>
     <div id="red"></div>
-    <div id="green"></div>
-    <script type="module" src="scrtipt.js"></script>
+    <script>
+      function reducer(state, action) {
+        if (state === undefined) {
+          // 초기 state 값 셋팅
+          return { color: "yellow" };
+        }
+      }
+      var store = Redux.createStore(reducer);
+      console.log(store.getState());
+
+      function red() {
+        var state = store.getState();
+        document.getElementById("red").innerHTML = `
+          <div class="container" id="conponent_red" style="background-color:${state.color}">
+            <h1>red</red>
+            <input type="button" value="fire" onclick='document.getElementById("conponent_red").style.backgroundColor = "red";document.getElementById("conponent_green").style.backgroundColor = "red";'/>
+          </div>
+        `;
+      }
+      red();
+    </script>
   </body>
 </html>
