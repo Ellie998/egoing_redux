@@ -18,6 +18,8 @@
       }
     </style>
     <div id="red"></div>
+    <div id="blue"></div>
+    <div id="green"></div>
     <script>
       function reducer(state, action) {
         console.log(state, action);
@@ -27,7 +29,7 @@
         }
         var newState;
         if (action.type === "CHANGE_COLOR") {
-          newState = Object.assign({}, state, { color: "red" });
+          newState = Object.assign({}, state, { color: action.color });
         }
         return newState;
       }
@@ -46,6 +48,33 @@
         `;
       }
       red();
+      store.subscribe(red);
+      function blue() {
+        var state = store.getState();
+        document.getElementById("blue").innerHTML = `
+          <div class="container" id="conponent_blue" style="background-color:${state.color}">
+            <h1>blue</red>
+            <input type="button" value="fire" onclick='
+              store.dispatch({type:"CHANGE_COLOR", color:"blue"})
+            '/>
+          </div>
+        `;
+      }
+      blue();
+      store.subscribe(blue);
+      function green() {
+        var state = store.getState();
+        document.getElementById("green").innerHTML = `
+          <div class="container" id="conponent_green" style="background-color:${state.color}">
+            <h1>green</red>
+            <input type="button" value="fire" onclick='
+              store.dispatch({type:"CHANGE_COLOR", color:"green"})
+            '/>
+          </div>
+        `;
+      }
+      green();
+      store.subscribe(green);
     </script>
   </body>
 </html>
